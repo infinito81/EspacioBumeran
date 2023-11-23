@@ -146,7 +146,7 @@ public class AulaBumeranController {
 				+ "    Para confirmar la inscripción a los cursos tendrás que abonar la cantidad de " + precio + "€ \r\n" 
 				+ "    Puedes abonarlo:\r\n"
 				+ "    - Vía Bizum al número de teléfono: 618210095\r\n"
-				+ "    - Vía Transferencia al número de cuenta ES90 1465 0100 91 1734833419\r\n\n"
+				+ "    - Vía Transferencia al número de cuenta ES51 3190 2099 17 5819838227\r\n\n"
 				+ "    (*) Recuerda poner en el concepto el identificador de inscripción " + inscriptionId +" o tu email";
 		
 		sendMailService.sendMail("info@espaciobumeran.com", signInCourses.getEmailAddress(), subject, body);
