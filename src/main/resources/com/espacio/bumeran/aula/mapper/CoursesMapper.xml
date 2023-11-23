@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.espacio.bumeran.aula.mapper.CoursesMapper">
+	<!-- Recupera el dispositivo de un terminal conociendo el id de una alarma -->
+	<select id="getUserCourses"	parameterType="java.lang.String"
+									resultType="com.espacio.bumeran.aula.model.Course">
+		<![CDATA[
+SELECT cur."idCurso", cur."iconoCurso", cur."txtoCorto", cur."txtoMedio", 
+cur."txtoLargo", cur."descripcionCorta", cur."descripcionLarga", cur."numHoras", cur."fechaInicio", cur."fechaFin", cur.precio, cur."precioOferta", 
+cur.modalidad
+	FROM public."Curso" cur, public."RelUsuarioCurso" rel
+	WHERE cur."idCurso" = rel."idCurso"
+	and rel."username" = #{userName};			
+		]]>							
+	</select>
+	
+	
+	
+	<update id="updateCourseImage">
+			UPDATE public."Curso" 
+			SET "iconoCurso" = #{imageBytes, jdbcType=BLOB}
+			WHERE "idCurso" = #{idCurso};
+	</update>	
+	
+</mapper>
