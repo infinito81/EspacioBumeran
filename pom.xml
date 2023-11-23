@@ -31,26 +31,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!--
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-ear-plugin</artifactId>
-				 <configuration>
-				 	<generateApplicationXml>true</generateApplicationXml>
-                    <displayName>moaEAR</displayName>
-                     <finalName>moaEAR</finalName>
-                    <modules>
-                    	<webModule>
-                    		<groupId>com.renfe.moa</groupId>
-                			<artifactId>MOA_SERVER_REST_SERVICES</artifactId>
-               				<uri>dist/target/distribucion/jar/moa.jar</uri>
-							 			<bundleFileName>moa.jar</bundleFileName>
-                			<contextRoot>/moa</contextRoot>
-                    	</webModule>
-                    </modules>
-                    
-				 </configuration>
-			</plugin>-->
 		</plugins>
 
 	
@@ -117,7 +97,14 @@
 		    <groupId>org.springframework.boot</groupId>
     		<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>	
-    		
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>	
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>		    		
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>

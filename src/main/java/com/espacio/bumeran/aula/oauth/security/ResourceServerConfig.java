@@ -40,7 +40,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 	public void configure(HttpSecurity http) throws Exception {
 		//TODO configurar las rutas
 		http.authorizeRequests()
-		.antMatchers("/oauth/token/**").permitAll()
+		.antMatchers("/oauth/**").permitAll()
 		.antMatchers("/api/teacher/**").permitAll()
 		.antMatchers("/api/users/**").permitAll()
 		.antMatchers("/api/test/**").permitAll()		
