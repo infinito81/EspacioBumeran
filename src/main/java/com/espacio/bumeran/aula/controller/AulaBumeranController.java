@@ -112,9 +112,14 @@ public class AulaBumeranController {
 			precio = "50";
 		}
 		
+		System.out.println("Precio " + precio);
+		
 		int resultInscription = coursesMapper.insertInscription(signInCourses.getEmailAddress(), signInCourses.getFirstName(), signInCourses.getLastName(), signInCourses.getPhone(), signInCourses.getPack());
 		
+		System.out.println("Inscripcion " + resultInscription);
+		
 		int inscriptionId = coursesMapper.getInscriptionId(signInCourses.getEmailAddress());
+		System.out.println("Inscripcion id " + inscriptionId);
 		
 		if (signInCourses.isCuentos()) {
 			coursesMapper.insertCourseInscription(1, inscriptionId);
