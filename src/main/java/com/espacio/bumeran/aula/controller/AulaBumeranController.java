@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +36,7 @@ import com.espacio.bumeran.aula.mapper.UserRepositoryImp;
 import com.espacio.bumeran.aula.model.Course;
 import com.espacio.bumeran.aula.model.RegisterUser;
 import com.espacio.bumeran.aula.model.SignInCourses;
+import com.espacio.bumeran.aula.services.SendMailService;
 
 //import jakarta.servlet.http.HttpSession;
 
@@ -55,6 +58,9 @@ public class AulaBumeranController {
 	
 	@Autowired
 	private CoursesMapper coursesMapper;
+	
+	@Autowired 
+	private SendMailService sendMailService;
 
 	
 	@GetMapping("/test")
@@ -97,11 +103,50 @@ public class AulaBumeranController {
 
 	
 	@PostMapping(path="/users/signinOnlineCourses", consumes = "application/json")
-	public void signinOnlineCourses (@RequestBody SignInCourses signInCourses) {
-		/*String passwordEncode = passwordEncoder.encode(registerUser.getPassword());
-		userRepository.insertUser(registerUser.getEmailAddress(), registerUser.getFirstName(), registerUser.getLastName(), passwordEncode, true);		
-		userRepository.insertRoleUser(registerUser.getEmailAddress(), "ALUMNO");*/
+	public String signinOnlineCourses (@RequestBody SignInCourses signInCourses) {
 		System.out.println(signInCourses.toString());
+		String precio = "25";
+		if (signInCourses.getPack().equals("2")) {
+			precio = "30";	
+		} else if (signInCourses.getPack().equals("3")) {
+			precio = "50";
+		}
+		
+		int resultInscription = coursesMapper.insertInscription(signInCourses.getEmailAddress(), signInCourses.getFirstName(), signInCourses.getLastName(), signInCourses.getPhone(), signInCourses.getPack());
+		
+		int inscriptionId = coursesMapper.getInscriptionId(signInCourses.getEmailAddress());
+		
+		if (signInCourses.isCuentos()) {
+			coursesMapper.insertCourseInscription(1, inscriptionId);
+		}
+		
+		if (signInCourses.isVinculos()) {
+			coursesMapper.insertCourseInscription(2, inscriptionId);
+		} 
+		
+		if (signInCourses.isInfluencers()) {
+			coursesMapper.insertCourseInscription(3, inscriptionId);
+		} 
+		
+		if (signInCourses.isZapatos()) {
+			coursesMapper.insertCourseInscription(4, inscriptionId);
+		} 
+		
+		if (signInCourses.isLimites()) {
+			coursesMapper.insertCourseInscription(5, inscriptionId);
+		} 				
+		String subject = "PreInscripción a cursos Espacio Bumeran. Id de Inscripción: " + inscriptionId;
+		String body = "¡ENHORABUENA!\r\n"
+				+ "    Tu preinscripción a los cursos online de Espacio Bumerán ha sido realizada con éxito.\r\n"
+				+ "    Para confirmar la inscripción a los cursos tendrás que abonar la cantidad de " + precio + "€ \r\n" 
+				+ "    Puedes abonarlo:\r\n"
+				+ "    - Vía Bizum al número de teléfono: 618210095\r\n"
+				+ "    - Vía Transferencia al número de cuenta ES90 1465 0100 91 1734833419\r\n\n"
+				+ "    (*) Recuerda poner en el concepto el identificador de inscripción " + inscriptionId +" o tu email";
+		
+		sendMailService.sendMail("info@espaciobumeran.com", signInCourses.getEmailAddress(), subject, body);
+		
+		return inscriptionId + "";
 	}
 
 

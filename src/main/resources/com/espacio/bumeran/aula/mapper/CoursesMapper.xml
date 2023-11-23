@@ -25,4 +25,26 @@ cur.modalidad
 			WHERE "idCurso" = #{idCurso};
 	</update>	
 	
+	<insert id="insertCourseInscription">
+			INSERT INTO public."RelInscriptionCourse"
+			VALUES (#{inscriptionId},#{courseId});
+	</insert>
+	
+	<insert id="insertInscription">
+			INSERT INTO public."Inscription"(
+				"email", "nombre", "apellidos", "telefono", "inscriptionDate", "pack")
+				VALUES (#{email}, #{nombre}, #{apellidos}, #{telefono}, CURRENT_TIMESTAMP, #{pack});
+	</insert>
+	
+	
+	<select id="getInscriptionId"	parameterType="java.lang.String"
+									resultType="java.lang.Integer">
+
+				SELECT  max("inscriptionId")
+				FROM public."Inscription"
+				WHERE "email" = #{email};
+				
+							
+	</select>		
+	
 </mapper>
