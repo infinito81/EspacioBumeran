@@ -70,7 +70,7 @@ public class AulaBumeranController {
 	}
 	
 	
-	@GetMapping(path="/visitRegistration", consumes = "application/json")
+	@GetMapping(path="/users/visitRegistration", consumes = "application/json")
 	public void visitRegistration (@RequestParam String modo){
 		System.out.println("Han entrado en la web." + modo);		
 	}	
