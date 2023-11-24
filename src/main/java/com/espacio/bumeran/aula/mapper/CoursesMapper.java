@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.repository.query.Param;
 
 import com.espacio.bumeran.aula.model.Course;
+import com.espacio.bumeran.aula.model.Inscription;
 
 public interface CoursesMapper {
 	List<Course> getUserCourses(@Param("userName") String userName);
@@ -18,4 +19,6 @@ public interface CoursesMapper {
 			@Param("telefono") String telefono, @Param("pack") String pack);
 
 	int getInscriptionId(@Param("email") String email);
+
+	List<Inscription> getAllInscriptions();
 }

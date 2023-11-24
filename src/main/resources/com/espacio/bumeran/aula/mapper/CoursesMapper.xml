@@ -39,12 +39,19 @@ cur.modalidad
 	
 	<select id="getInscriptionId"	parameterType="java.lang.String"
 									resultType="java.lang.Integer">
-
 				SELECT  max("inscriptionId")
 				FROM public."Inscription"
-				WHERE "email" = #{email};
-				
+				WHERE "email" = #{email};				
 							
 	</select>		
 	
+	
+	<select id="getAllInscriptions"	resultType="com.espacio.bumeran.aula.model.Inscription">
+		<![CDATA[
+			SELECT ins."inscriptionId", ins."nombre", ins."apellidos", ins."email", ins."telefono", ins."pack", cou."courseDesc"
+			FROM public."Inscription" ins, public."RelInscriptionCourse" rel, public."Course" cou
+			WHERE ins."inscriptionId" = rel."inscriptionId"
+			AND rel."courseId" = cou."courseId";		
+		]]>							
+	</select>	
 </mapper>

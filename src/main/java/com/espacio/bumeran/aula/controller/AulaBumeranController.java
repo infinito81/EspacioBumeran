@@ -34,6 +34,7 @@ import com.espacio.bumeran.aula.mapper.CoursesMapper;
 //import com.espacio.bumeran.aula.mapper.CourseMapper;
 import com.espacio.bumeran.aula.mapper.UserRepositoryImp;
 import com.espacio.bumeran.aula.model.Course;
+import com.espacio.bumeran.aula.model.Inscription;
 import com.espacio.bumeran.aula.model.RegisterUser;
 import com.espacio.bumeran.aula.model.SignInCourses;
 import com.espacio.bumeran.aula.services.SendMailService;
@@ -89,6 +90,7 @@ public class AulaBumeranController {
 		//return null;
 	}	
 	
+
 	@PostMapping(path="/teacher/postImage")
 	public void postImage () throws Exception{
 		
@@ -105,6 +107,14 @@ public class AulaBumeranController {
 		coursesMapper.updateCourseImage(3, bytes);
 		System.out.println("Imagen actualizada.");
 	}	
+	
+	@GetMapping(path="/users/getInscriptions", produces = "application/json")
+	public List<Inscription> getInscriptions () {
+		System.out.println("getInscriptions " );
+		List<Inscription> inscriptions = coursesMapper.getAllInscriptions();
+		return inscriptions;
+	}		
+		
 
 	
 	@PostMapping(path="/users/signinOnlineCourses", consumes = "application/json")
