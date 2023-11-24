@@ -63,11 +63,16 @@ public class AulaBumeranController {
 	private SendMailService sendMailService;
 
 	
-	@GetMapping("/test")
-	public String test (){
+	@GetMapping(path="/test", produces = "text/plain")
+	public String test (){		
 		return "TEST OK";
 	}
 	
+	
+	@GetMapping(path="/visitRegistration", consumes = "application/json")
+	public void visitRegistration (@RequestParam String modo){
+		System.out.println("Han entrado en la web." + modo);		
+	}	
 
 	@PostMapping(path="/users/register", consumes = "application/json")
 	public void register (@RequestBody RegisterUser registerUser) {
