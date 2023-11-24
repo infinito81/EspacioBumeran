@@ -105,14 +105,9 @@ public class AulaBumeranController {
 	@PostMapping(path="/users/signinOnlineCourses", consumes = "application/json")
 	public String signinOnlineCourses (@RequestBody SignInCourses signInCourses) {
 		System.out.println(signInCourses.toString());
-		String precio = "25";
-		if (signInCourses.getPack().equals("2")) {
-			precio = "30";	
-		} else if (signInCourses.getPack().equals("3")) {
-			precio = "50";
-		}
+
 		
-		System.out.println("Precio " + precio);
+		//System.out.println("Precio " + precio);
 		
 		int resultInscription = coursesMapper.insertInscription(signInCourses.getEmailAddress(), signInCourses.getFirstName(), signInCourses.getLastName(), signInCourses.getPhone(), signInCourses.getPack());
 		
@@ -140,14 +135,39 @@ public class AulaBumeranController {
 		if (signInCourses.isLimites()) {
 			coursesMapper.insertCourseInscription(5, inscriptionId);
 		} 				
-		String subject = "PreInscripción a cursos Espacio Bumeran. Id de Inscripción: " + inscriptionId;
+		String subject = "PreInscripción a talleres online Espacio Bumeran. Id de Inscripción: " + inscriptionId;
+		
+		String precio = "25";
+		if (signInCourses.getPack().equals("2")) {
+			precio = "30";	
+		} else if (signInCourses.getPack().equals("3")) {
+			precio = "50";
+		} else if (signInCourses.getPack().equals("11")) {
+			precio = "190";
+			subject = "PreInscripción a evento VIRAGO de Espacio Bumeran. Id de Inscripción: " + inscriptionId;
+		} else if (signInCourses.getPack().equals("12")) {
+			precio = "360";			
+			subject = "PreInscripción a evento VIRAGO de Espacio Bumeran. Id de Inscripción: " + inscriptionId;
+		}		
+		
+		
 		String body = "¡ENHORABUENA!\r\n"
-				+ "    Tu preinscripción a los cursos online de Espacio Bumerán ha sido realizada con éxito.\r\n"
-				+ "    Para confirmar la inscripción a los cursos tendrás que abonar la cantidad de " + precio + "€ \r\n" 
+				+ "    Tu preinscripción a los talleres online de Espacio Bumerán ha sido realizada con éxito.\r\n"
+				+ "    Para confirmar la inscripción a los talleres tendrás que abonar la cantidad de " + precio + "€ \r\n" 
 				+ "    Puedes abonarlo:\r\n"
 				+ "    - Vía Bizum al número de teléfono: 618210095\r\n"
 				+ "    - Vía Transferencia al número de cuenta ES51 3190 2099 17 5819838227\r\n\n"
 				+ "    (*) Recuerda poner en el concepto el identificador de inscripción " + inscriptionId +" o tu email";
+		
+		if (signInCourses.getPack().equals("11") || signInCourses.getPack().equals("12")) {
+			body = "¡ENHORABUENA!\r\n"
+					+ "    Tu preinscripción al evento VIRAGO de Espacio Bumerán ha sido realizada con éxito.\r\n"
+					+ "    Para confirmar la inscripción al evento tendrás que abonar la cantidad de " + precio + "€ \r\n" 
+					+ "    Puedes abonarlo:\r\n"
+					+ "    - Vía Bizum al número de teléfono: 618210095\r\n"
+					+ "    - Vía Transferencia al número de cuenta ES51 3190 2099 17 5819838227\r\n\n"
+					+ "    (*) Recuerda poner en el concepto el identificador de inscripción " + inscriptionId +" o tu email";
+		}
 		
 		sendMailService.sendMail("info@espaciobumeran.com", signInCourses.getEmailAddress(), subject, body);
 		
