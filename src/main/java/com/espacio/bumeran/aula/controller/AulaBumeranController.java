@@ -184,7 +184,7 @@ public class AulaBumeranController {
 					+ "    (*) Recuerda poner en el concepto el identificador de inscripción " + inscriptionId +" o tu email";
 		}
 		
-		sendMailService.sendMail("info@espaciobumeran.com", signInCourses.getEmailAddress(), subject, body);
+		sendMailService.sendMail("inscripciones@espaciobumeran.com", signInCourses.getEmailAddress(), subject, body);
 		
 		return inscriptionId + "";
 	}

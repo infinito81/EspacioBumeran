@@ -19,7 +19,7 @@ public class SendMailService {
 		javaMailSender.setHost("smtp.ionos.es");
 		javaMailSender.setPort(587);
 	    
-		javaMailSender.setUsername("info@espaciobumeran.com");
+		javaMailSender.setUsername("inscripciones@espaciobumeran.com");
 		javaMailSender.setPassword("DavidSanchez_2019");
 	    
 	    Properties props = javaMailSender.getJavaMailProperties();
