@@ -17,17 +17,14 @@ public class SendMailService {
 	public void sendMail (String from, String to, String subject, String body) {
 		JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 		javaMailSender.setHost("smtp.ionos.es");
-		javaMailSender.setPort(587);
-	    
+		javaMailSender.setPort(587);   
 		javaMailSender.setUsername("inscripciones@espaciobumeran.com");
 		javaMailSender.setPassword("DavidSanchez_2019");
 	    
 	    Properties props = javaMailSender.getJavaMailProperties();
 	    props.put("mail.transport.protocol", "smtp");
 	    props.put("mail.smtp.auth", "true");
-	    props.put("mail.smtp.starttls.enable", "true");
-	    
-	    
+	    props.put("mail.smtp.starttls.enable", "true");    
 		
 		
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();

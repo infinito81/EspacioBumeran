@@ -20,6 +20,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.espacio.bumeran.aula.mapper.CoursesMapper;
+import com.espacio.bumeran.aula.mapper.VisitMapper;
 
 @Configuration
 @EnableTransactionManagement
@@ -68,6 +69,7 @@ public class DataSourceBean {
 		SqlSessionFactory sqlSessionFactory;
 		sqlSessionFactory = sqlSessionFactoryBean.getObject();
 		sqlSessionFactory.getConfiguration().addMapper(CoursesMapper.class);
+		sqlSessionFactory.getConfiguration().addMapper(VisitMapper.class);
 
 		
 		System.out.println("SQLSession configured");
@@ -76,7 +78,12 @@ public class DataSourceBean {
     }
        
     
-    
+	@Bean
+	public MapperFactoryBean<VisitMapper> visitMapper(@Named(POSTGRE_SESSION_FACTORY) final SqlSessionFactoryBean sqlSessionFactoryBean) throws Exception{
+		MapperFactoryBean<VisitMapper> factoryBean = new MapperFactoryBean<>(VisitMapper.class);
+		factoryBean.setSqlSessionFactory(sqlSessionFactoryBean.getObject());
+		return factoryBean;
+	}
     
     
 	@Bean

@@ -33,6 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.espacio.bumeran.aula.mapper.CoursesMapper;
 //import com.espacio.bumeran.aula.mapper.CourseMapper;
 import com.espacio.bumeran.aula.mapper.UserRepositoryImp;
+import com.espacio.bumeran.aula.mapper.VisitMapper;
 import com.espacio.bumeran.aula.model.Course;
 import com.espacio.bumeran.aula.model.Inscription;
 import com.espacio.bumeran.aula.model.RegisterUser;
@@ -56,6 +57,8 @@ public class AulaBumeranController {
 	@Autowired
 	private UserRepositoryImp userRepository;
 	
+	@Autowired
+	private VisitMapper visitMapper;	
 	
 	@Autowired
 	private CoursesMapper coursesMapper;
@@ -71,8 +74,12 @@ public class AulaBumeranController {
 	
 	
 	@GetMapping(path="/users/visitRegistration", consumes = "application/json")
-	public void visitRegistration (@RequestParam String modo){
-		System.out.println("Han entrado en la web." + modo);		
+	public void visitRegistration (@RequestParam String page){
+		System.out.println("Han entrado en la web." + page);
+		
+		visitMapper.insertVisit(page);
+		
+		System.out.println("Fin registro visita");
 	}	
 
 	@PostMapping(path="/users/register", consumes = "application/json")
