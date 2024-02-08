@@ -73,9 +73,9 @@ public class AulaBumeranController {
 	}
 	
 	
-	@GetMapping(path="/users/visitRegistration", consumes = "application/json")
+	@GetMapping(path="/test/visitRegistration")
 	public void visitRegistration (@RequestParam String page){
-		System.out.println("Han entrado en la web." + page);
+		System.out.println("Han entrado en la web --> " + page);
 		
 		visitMapper.insertVisit(page);
 		
