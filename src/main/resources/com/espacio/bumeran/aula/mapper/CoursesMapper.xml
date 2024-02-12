@@ -44,9 +44,15 @@ cur.modalidad
 				WHERE "email" = #{email};				
 							
 	</select>		
-	
-	
+
 	<select id="getAllInscriptions"	resultType="com.espacio.bumeran.aula.model.Inscription">
+		<![CDATA[
+			SELECT ins."inscriptionId", ins."nombre", ins."apellidos", ins."email", ins."telefono", ins."pack"
+			FROM public."Inscription" ins					
+		]]>							
+	</select>	
+	
+	<select id="getAllInscriptionsRel"	resultType="com.espacio.bumeran.aula.model.Inscription">
 		<![CDATA[
 			SELECT ins."inscriptionId", ins."nombre", ins."apellidos", ins."email", ins."telefono", ins."pack", cou."courseDesc"
 			FROM public."Inscription" ins, public."RelInscriptionCourse" rel, public."Course" cou
