@@ -193,7 +193,7 @@ public class AulaBumeranController {
 		
 		if (signInCourses.getPack().equals("11") || signInCourses.getPack().equals("12")) {
 			body = "¡ENHORABUENA!\r\n"
-					+ "    Tu preinscripción al evento VIRAGO de Espacio Bumerán ha sido realizada con éxito.\r\n"
+					+ "    Tu preinscripción al Retiro Toledo de Espacio Bumerán ha sido realizada con éxito.\r\n"
 					+ "    Para confirmar la inscripción al evento tendrás que abonar la cantidad de " + precio + "€ \r\n" 
 					+ "    Puedes abonarlo:\r\n"
 					+ "    - Vía Bizum al número de teléfono: 618210095\r\n"
