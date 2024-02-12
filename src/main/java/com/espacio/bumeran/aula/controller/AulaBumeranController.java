@@ -138,7 +138,7 @@ public class AulaBumeranController {
 		int inscriptionId = coursesMapper.getInscriptionId(signInCourses.getEmailAddress());
 		System.out.println("Inscripcion id " + inscriptionId);
 		
-		if (signInCourses.isCuentos()) {
+		/*if (signInCourses.isCuentos()) {
 			coursesMapper.insertCourseInscription(1, inscriptionId);
 		}
 		
@@ -156,7 +156,8 @@ public class AulaBumeranController {
 		
 		if (signInCourses.isLimites()) {
 			coursesMapper.insertCourseInscription(5, inscriptionId);
-		} 				
+		} */
+		
 		String subject = "PreInscripción a talleres online Espacio Bumeran. Id de Inscripción: " + inscriptionId;
 		
 		String precio = "25";
@@ -165,16 +166,25 @@ public class AulaBumeranController {
 		} else if (signInCourses.getPack().equals("3")) {
 			precio = "50";
 		} else if (signInCourses.getPack().equals("11")) {
-			precio = "190";
+			precio = "249";
 			subject = "PreInscripción a evento VIRAGO de Espacio Bumeran. Id de Inscripción: " + inscriptionId;
 		} else if (signInCourses.getPack().equals("12")) {
-			precio = "360";			
+			precio = "450";			
 			subject = "PreInscripción a evento VIRAGO de Espacio Bumeran. Id de Inscripción: " + inscriptionId;
-		}		
+		} else if (signInCourses.getPack().equals("20")) {
+			if (signInCourses.isNoSocio()) {
+				precio = "18";
+				coursesMapper.insertCourseInscription(20, inscriptionId);
+			} else {
+				precio = "15";
+				coursesMapper.insertCourseInscription(20, inscriptionId);
+			}
+			subject = "PreInscripción a taller Vínculos: Autoestima y Emociones. Id de Inscripción: " + inscriptionId;
+		}
 		
 		
 		String body = "¡ENHORABUENA!\r\n"
-				+ "    Tu preinscripción a los talleres online de Espacio Bumerán ha sido realizada con éxito.\r\n"
+				+ "    Tu preinscripción al taller de Espacio Bumerán ha sido realizada con éxito.\r\n"
 				+ "    Para confirmar la inscripción a los talleres tendrás que abonar la cantidad de " + precio + "€ \r\n" 
 				+ "    Puedes abonarlo:\r\n"
 				+ "    - Vía Bizum al número de teléfono: 618210095\r\n"
@@ -189,9 +199,19 @@ public class AulaBumeranController {
 					+ "    - Vía Bizum al número de teléfono: 618210095\r\n"
 					+ "    - Vía Transferencia al número de cuenta ES51 3190 2099 17 5819838227\r\n\n"
 					+ "    (*) Recuerda poner en el concepto el identificador de inscripción " + inscriptionId +" o tu email";
+		} else if (signInCourses.getPack().equals("20")){
+			body = "¡ENHORABUENA!\r\n"
+					+ "    Tu preinscripción al taller Vínculos: Autoestima y Emociones de Espacio Bumerán ha sido realizada con éxito.\r\n"
+					+ "    Para confirmar la inscripción al evento tendrás que abonar la cantidad de " + precio + "€ \r\n" 
+					+ "    Puedes abonarlo:\r\n"
+					+ "    - Vía Bizum al número de teléfono: 618210095\r\n"
+					+ "    - Vía Transferencia al número de cuenta ES51 3190 2099 17 5819838227\r\n\n"
+					+ "    (*) Recuerda poner en el concepto el identificador de inscripción " + inscriptionId +" o tu email";			
 		}
 		
 		sendMailService.sendMail("inscripciones@espaciobumeran.com", signInCourses.getEmailAddress(), subject, body);
+		
+
 		
 		return inscriptionId + "";
 	}

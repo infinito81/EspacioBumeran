@@ -11,6 +11,28 @@ public class SignInCourses {
 	private boolean influencers;
 	private boolean zapatos;
 	private boolean limites;
+	private boolean noSocio;
+	private boolean sociotorre;
+	private boolean socioeugenio;
+	
+	public boolean isNoSocio() {
+		return noSocio;
+	}
+	public void setNoSocio(boolean noSocio) {
+		this.noSocio = noSocio;
+	}
+	public boolean isSociotorre() {
+		return sociotorre;
+	}
+	public void setSociotorre(boolean sociotorre) {
+		this.sociotorre = sociotorre;
+	}
+	public boolean isSocioeugenio() {
+		return socioeugenio;
+	}
+	public void setSocioeugenio(boolean socioeugenio) {
+		this.socioeugenio = socioeugenio;
+	}
 	public String getEmailAddress() {
 		return emailAddress;
 	}
@@ -75,8 +97,10 @@ public class SignInCourses {
 	public String toString() {
 		return "SignInCourses [emailAddress=" + emailAddress + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", phone=" + phone + ", pack=" + pack + ", cuentos=" + cuentos + ", vinculos=" + vinculos
-				+ ", influencers=" + influencers + ", zapatos=" + zapatos + ", limites=" + limites + "]";
+				+ ", influencers=" + influencers + ", zapatos=" + zapatos + ", limites=" + limites + ", noSocio="
+				+ noSocio + ", sociotorre=" + sociotorre + ", socioeugenio=" + socioeugenio + "]";
 	}
+
 	
 
 }
