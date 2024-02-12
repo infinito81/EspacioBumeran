@@ -167,10 +167,10 @@ public class AulaBumeranController {
 			precio = "50";
 		} else if (signInCourses.getPack().equals("11")) {
 			precio = "249";
-			subject = "PreInscripción a evento VIRAGO de Espacio Bumeran. Id de Inscripción: " + inscriptionId;
+			subject = "PreInscripción a Retiro Toledo de Espacio Bumerán. Id de Inscripción: " + inscriptionId;
 		} else if (signInCourses.getPack().equals("12")) {
 			precio = "450";			
-			subject = "PreInscripción a evento VIRAGO de Espacio Bumeran. Id de Inscripción: " + inscriptionId;
+			subject = "PreInscripción a Retiro Toledo de Espacio Bumerán. Id de Inscripción: " + inscriptionId;
 		} else if (signInCourses.getPack().equals("20")) {
 			if (signInCourses.isNoSocio()) {
 				precio = "18";
