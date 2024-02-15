@@ -167,10 +167,10 @@ public class AulaBumeranController {
 			precio = "50";
 		} else if (signInCourses.getPack().equals("11")) {
 			precio = "249";
-			subject = "PreInscripción a Retiro Toledo de Espacio Bumerán. Id de Inscripción: " + inscriptionId;
+			subject = "Inscripción a Retiro Toledo de Espacio Bumerán. Id de Inscripción: " + inscriptionId;
 		} else if (signInCourses.getPack().equals("12")) {
 			precio = "450";			
-			subject = "PreInscripción a Retiro Toledo de Espacio Bumerán. Id de Inscripción: " + inscriptionId;
+			subject = "Inscripción a Retiro Toledo de Espacio Bumerán. Id de Inscripción: " + inscriptionId;
 		} else if (signInCourses.getPack().equals("20")) {
 			if (signInCourses.isNoSocio()) {
 				precio = "18";
@@ -179,34 +179,37 @@ public class AulaBumeranController {
 				precio = "15";
 				coursesMapper.insertCourseInscription(20, inscriptionId);
 			}
-			subject = "PreInscripción a taller Vínculos: Autoestima y Emociones. Id de Inscripción: " + inscriptionId;
+			subject = "Inscripción a taller Vínculos: Autoestima y Emociones. Id de Inscripción: " + inscriptionId;
 		}
 		
 		
 		String body = "¡ENHORABUENA!\r\n"
-				+ "    Tu preinscripción al taller de Espacio Bumerán ha sido realizada con éxito.\r\n"
+				+ "    Tu Inscripción al taller de Espacio Bumerán ha sido realizada con éxito.\r\n"
 				+ "    Para confirmar la inscripción a los talleres tendrás que abonar la cantidad de " + precio + "€ \r\n" 
-				+ "    Puedes abonarlo:\r\n"
+				+ "    Puedes abonarlo en un plazo de dos días desde que recibas este mail:\r\n"
 				+ "    - Vía Bizum al número de teléfono: 618210095\r\n"
 				+ "    - Vía Transferencia al número de cuenta ES51 3190 2099 17 5819838227\r\n\n"
 				+ "    (*) Recuerda poner en el concepto el identificador de inscripción " + inscriptionId +" o tu email";
 		
 		if (signInCourses.getPack().equals("11") || signInCourses.getPack().equals("12")) {
 			body = "¡ENHORABUENA!\r\n"
-					+ "    Tu preinscripción al Retiro Toledo de Espacio Bumerán ha sido realizada con éxito.\r\n"
-					+ "    Para confirmar la inscripción al evento tendrás que abonar la cantidad de " + precio + "€ \r\n" 
+					+ "    Tu Inscripción al Retiro Toledo de Espacio Bumerán ha sido realizada con éxito.\r\n"
+					+ "    Para confirmar la inscripción al evento tendrás que abonar la cantidad de " + precio + "€ en un plazo de 24 horas desde que recibas este mail\r\n" 
 					+ "    Puedes abonarlo:\r\n"
 					+ "    - Vía Bizum al número de teléfono: 618210095\r\n"
 					+ "    - Vía Transferencia al número de cuenta ES51 3190 2099 17 5819838227\r\n\n"
-					+ "    (*) Recuerda poner en el concepto el identificador de inscripción " + inscriptionId +" o tu email";
+					+ "    (*) Recuerda poner en el concepto el identificador de inscripción " + inscriptionId +" o tu email\r\n\n"
+					+ "	   (*) En caso de que no salga el mínimo grupo para el retiro, el dinero será devuelto íntegramente.";	
+
 		} else if (signInCourses.getPack().equals("20")){
 			body = "¡ENHORABUENA!\r\n"
-					+ "    Tu preinscripción al taller Vínculos: Autoestima y Emociones de Espacio Bumerán ha sido realizada con éxito.\r\n"
-					+ "    Para confirmar la inscripción al evento tendrás que abonar la cantidad de " + precio + "€ \r\n" 
-					+ "    Puedes abonarlo:\r\n"
+					+ "    Tu Inscripción al taller Vínculos: Autoestima y Emociones de Espacio Bumerán ha sido realizada con éxito.\r\n"
+					+ "    Para confirmar la inscripción al evento tendrás que abonar la cantidad de " + precio + "€ en un plazo de 24 horas desde que recibas este mail\r\n" 
+					+ "    Puedes abonarlo :\r\n"
 					+ "    - Vía Bizum al número de teléfono: 618210095\r\n"
 					+ "    - Vía Transferencia al número de cuenta ES51 3190 2099 17 5819838227\r\n\n"
-					+ "    (*) Recuerda poner en el concepto el identificador de inscripción " + inscriptionId +" o tu email";			
+					+ "    (*) Recuerda poner en el concepto el identificador de inscripción " + inscriptionId +" o tu email\r\n\n"
+					+ "	   (*) En caso de que el curso no se realizara, el dinero será devuelto íntegramente.";			
 		}
 		
 		System.out.println("Vamos a mandar mail a dirección cliente " + signInCourses.getEmailAddress());
