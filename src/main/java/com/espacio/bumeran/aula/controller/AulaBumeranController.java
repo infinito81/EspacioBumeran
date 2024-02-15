@@ -209,7 +209,11 @@ public class AulaBumeranController {
 					+ "    (*) Recuerda poner en el concepto el identificador de inscripción " + inscriptionId +" o tu email";			
 		}
 		
+		System.out.println("Vamos a mandar mail a dirección cliente " + signInCourses.getEmailAddress());
 		sendMailService.sendMail("inscripciones@espaciobumeran.com", signInCourses.getEmailAddress(), subject, body);
+		
+		System.out.println("Vamos a mandar copia del mail a espaciobumeran@gmail.com");
+		sendMailService.sendMail("inscripciones@espaciobumeran.com", "espaciobumeran@gmail.com", subject, body);
 		
 
 		
