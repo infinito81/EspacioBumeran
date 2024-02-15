@@ -172,7 +172,7 @@ public class AulaBumeranController {
 			precio = "450";			
 			subject = "Inscripción a Retiro Toledo de Espacio Bumerán. Id de Inscripción: " + inscriptionId;
 		} else if (signInCourses.getPack().equals("20")) {
-			if (signInCourses.isNoSocio()) {
+			if (!signInCourses.isSocioeugenio() && !signInCourses.isSociotorre()) {
 				precio = "18";
 				coursesMapper.insertCourseInscription(20, inscriptionId);
 			} else {
