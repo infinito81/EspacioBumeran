@@ -171,15 +171,15 @@ public class AulaBumeranController {
 		} else if (signInCourses.getPack().equals("12")) {
 			precio = "450";			
 			subject = "Inscripción a Retiro Toledo de Espacio Bumerán. Id de Inscripción: " + inscriptionId;
-		} else if (signInCourses.getPack().equals("20")) {
+		} else if (signInCourses.getPack().equals("21")) {
 			if (!signInCourses.isSocioeugenio() && !signInCourses.isSociotorre()) {
 				precio = "18";
-				coursesMapper.insertCourseInscription(20, inscriptionId);
+				coursesMapper.insertCourseInscription(21, inscriptionId);
 			} else {
 				precio = "15";
-				coursesMapper.insertCourseInscription(20, inscriptionId);
+				coursesMapper.insertCourseInscription(21, inscriptionId);
 			}
-			subject = "Inscripción a taller Vínculos: Autoestima y Emociones. Id de Inscripción: " + inscriptionId;
+			subject = "Inscripción a taller Entrenador@s Emocionales. Id de Inscripción: " + inscriptionId;
 		}
 		
 		
@@ -201,9 +201,9 @@ public class AulaBumeranController {
 					+ "    (*) Recuerda poner en el concepto el identificador de inscripción " + inscriptionId +" o tu email\r\n\n"
 					+ "	   (*) En caso de que no salga el mínimo grupo para el retiro, el dinero será devuelto íntegramente.";	
 
-		} else if (signInCourses.getPack().equals("20")){
+		} else if (signInCourses.getPack().equals("21")){
 			body = "¡ENHORABUENA!\r\n"
-					+ "    Tu Inscripción al taller Vínculos: Autoestima y Emociones de Espacio Bumerán ha sido realizada con éxito.\r\n"
+					+ "    Tu Inscripción al taller ENTRENADOR@S EMOCIONALES de Espacio Bumerán ha sido realizada con éxito.\r\n"
 					+ "    Para confirmar la inscripción al evento tendrás que abonar la cantidad de " + precio + "€ en un plazo de 24 horas desde que recibas este mail\r\n" 
 					+ "    Puedes abonarlo :\r\n"
 					+ "    - Vía Bizum al número de teléfono: 618210095\r\n"
