@@ -21,4 +21,6 @@ public interface CoursesMapper {
 	int getInscriptionId(@Param("email") String email);
 
 	List<Inscription> getAllInscriptions();
+	
+	List<Inscription> getInscriptionsEvent(@Param("event") String event);
 }

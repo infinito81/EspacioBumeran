@@ -43,7 +43,15 @@ cur.modalidad
 				FROM public."Inscription"
 				WHERE "email" = #{email};				
 							
-	</select>		
+	</select>	
+	
+	<select id="getInscriptionsEvent"	parameterType="java.lang.String"
+									resultType="com.espacio.bumeran.aula.model.Inscription">
+			SELECT ins."inscriptionId", ins."nombre", ins."apellidos", ins."email", ins."telefono", ins."pack"
+			FROM public."Inscription" ins	
+				WHERE ins."pack" = #{event};				
+							
+	</select>	
 
 	<select id="getAllInscriptions"	resultType="com.espacio.bumeran.aula.model.Inscription">
 		<![CDATA[

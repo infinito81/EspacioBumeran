@@ -120,6 +120,14 @@ public class AulaBumeranController {
 		System.out.println("getInscriptions " );
 		List<Inscription> inscriptions = coursesMapper.getAllInscriptions();
 		return inscriptions;
+	}
+	
+	
+	@GetMapping(path="/users/getInscriptionsEvent", produces = "application/json")
+	public List<Inscription> getInscriptionsEvent (@RequestParam String event) {
+		System.out.println("getInscriptions. Particular event : " + event );
+		List<Inscription> inscriptions = coursesMapper.getInscriptionsEvent(event);
+		return inscriptions;
 	}		
 		
 
