@@ -6,6 +6,8 @@ public class SignInCourses {
 	private String lastName;
 	private String phone;
 	private String pack;
+	private String city;
+
 	private boolean cuentos;
 	private boolean vinculos;
 	private boolean influencers;
@@ -93,13 +95,20 @@ public class SignInCourses {
 	public void setLimites(boolean limites) {
 		this.limites = limites;
 	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
 	@Override
 	public String toString() {
 		return "SignInCourses [emailAddress=" + emailAddress + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", phone=" + phone + ", pack=" + pack + ", cuentos=" + cuentos + ", vinculos=" + vinculos
-				+ ", influencers=" + influencers + ", zapatos=" + zapatos + ", limites=" + limites + ", noSocio="
-				+ noSocio + ", sociotorre=" + sociotorre + ", socioeugenio=" + socioeugenio + "]";
-	}
+				+ ", phone=" + phone + ", pack=" + pack + ", city=" + city + ", cuentos=" + cuentos + ", vinculos="
+				+ vinculos + ", influencers=" + influencers + ", zapatos=" + zapatos + ", limites=" + limites
+				+ ", noSocio=" + noSocio + ", sociotorre=" + sociotorre + ", socioeugenio=" + socioeugenio + "]";
+	}	
+
 
 	
 

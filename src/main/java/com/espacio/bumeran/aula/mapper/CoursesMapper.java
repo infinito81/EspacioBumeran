@@ -16,7 +16,7 @@ public interface CoursesMapper {
 	int insertCourseInscription(@Param("courseId") int courseId, @Param("inscriptionId") int inscriptionId);
 	
 	int insertInscription(@Param("email") String email, @Param("nombre") String nombre, @Param("apellidos") String apellidos, 
-			@Param("telefono") String telefono, @Param("pack") String pack);
+			@Param("telefono") String telefono, @Param("pack") String pack, @Param("city") String city);
 
 	int getInscriptionId(@Param("email") String email);
 

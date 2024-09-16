@@ -1,35 +1,20 @@
 package com.espacio.bumeran.aula.controller;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.sql.Date;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.espacio.bumeran.aula.controller.in.SendMailServiceIn;
 import com.espacio.bumeran.aula.mapper.CoursesMapper;
 //import com.espacio.bumeran.aula.mapper.CourseMapper;
 import com.espacio.bumeran.aula.mapper.UserRepositoryImp;
@@ -39,6 +24,7 @@ import com.espacio.bumeran.aula.model.Inscription;
 import com.espacio.bumeran.aula.model.RegisterUser;
 import com.espacio.bumeran.aula.model.SignInCourses;
 import com.espacio.bumeran.aula.services.SendMailService;
+import com.espacio.bumeran.aula.util.HtmlUtils;
 
 //import jakarta.servlet.http.HttpSession;
 
@@ -139,7 +125,8 @@ public class AulaBumeranController {
 		
 		//System.out.println("Precio " + precio);
 		
-		int resultInscription = coursesMapper.insertInscription(signInCourses.getEmailAddress(), signInCourses.getFirstName(), signInCourses.getLastName(), signInCourses.getPhone(), signInCourses.getPack());
+		int resultInscription = coursesMapper.insertInscription(signInCourses.getEmailAddress(), signInCourses.getFirstName(), signInCourses.getLastName(), 
+														signInCourses.getPhone(), signInCourses.getPack(), signInCourses.getCity());
 		
 		System.out.println("Inscripcion " + resultInscription);
 		
@@ -188,6 +175,10 @@ public class AulaBumeranController {
 				coursesMapper.insertCourseInscription(21, inscriptionId);
 			}
 			subject = "Inscripción a taller Entrenador@s Emocionales. Id de Inscripción: " + inscriptionId;
+		} else if (signInCourses.getPack().equals("22")) {
+			//FREE EBOOK
+			coursesMapper.insertCourseInscription(Integer.parseInt(signInCourses.getPack()), inscriptionId);
+			subject = "EBOOK SUBJECT";
 		}
 		
 		
@@ -207,7 +198,13 @@ public class AulaBumeranController {
 					+ "    - Vía Bizum al número de teléfono: 618210095\r\n"
 					+ "    - Vía Transferencia al número de cuenta ES51 3190 2099 17 5819838227\r\n\n"
 					+ "    (*) Recuerda poner en el concepto el identificador de inscripción " + inscriptionId +" o tu email\r\n\n"
-					+ "	   (*) En caso de que no salga el mínimo grupo para el retiro, el dinero será devuelto íntegramente.";	
+					+ "	   (*) En caso de que no salga el mínimo grupo para el retiro, el dinero será devuelto íntegramente.";
+
+			System.out.println("Vamos a mandar mail a dirección cliente " + signInCourses.getEmailAddress());
+			sendMailService.sendMail("inscripciones@espaciobumeran.com", signInCourses.getEmailAddress(), subject, body);
+			
+			System.out.println("Vamos a mandar copia del mail a espaciobumeran@gmail.com");
+			sendMailService.sendMail("inscripciones@espaciobumeran.com", "espaciobumeran@gmail.com", subject, body);
 
 		} else if (signInCourses.getPack().equals("21")){
 			body = "¡ENHORABUENA!\r\n"
@@ -217,19 +214,63 @@ public class AulaBumeranController {
 					+ "    - Vía Bizum al número de teléfono: 618210095\r\n"
 					+ "    - Vía Transferencia al número de cuenta ES51 3190 2099 17 5819838227\r\n\n"
 					+ "    (*) Recuerda poner en el concepto el identificador de inscripción " + inscriptionId +" o tu email\r\n\n"
-					+ "	   (*) En caso de que el curso no se realizara, el dinero será devuelto íntegramente.";			
+					+ "	   (*) En caso de que el curso no se realizara, el dinero será devuelto íntegramente.";
+			
+			System.out.println("Vamos a mandar mail a dirección cliente " + signInCourses.getEmailAddress());
+			sendMailService.sendMail("inscripciones@espaciobumeran.com", signInCourses.getEmailAddress(), subject, body);
+			
+			System.out.println("Vamos a mandar copia del mail a espaciobumeran@gmail.com");
+			sendMailService.sendMail("inscripciones@espaciobumeran.com", "espaciobumeran@gmail.com", subject, body);
+			
+		} else if (signInCourses.getPack().equals("22")){
+			body = "<p><strong>Hola, soy Ana y tengo un mantra: \"Gotas de cambio, un mar de posibilidades\".</strong></p>\r\n"
+					+ "<p>&nbsp;</p>"
+					+ "<p>&iexcl;Enhorabuena! Has decidido priorizarte y comprometerte con tu salud y bienestar emocional, y estoy feliz de acompa&ntilde;arte en este viaje &#127754;.</p>\r\n"
+					+ "<p>Cada peque&ntilde;a gota de esfuerzo que pongas en ti misma puede transformarse en un oc&eacute;ano de bienestar y crecimiento, y hoy, con el ritual que te traigo, das el primer paso.</p>\r\n"
+					+ "<p>&nbsp;</p>"
+					+ "<p><strong>&iquest;Est&aacute;s lista para despedir el verano con toda la fuerza, la gratitud y la magia que te mereces?</strong></p>\r\n"
+					+ "<p>Este ebook est&aacute; dise&ntilde;ado para ayudarte a cerrar este ciclo con conciencia, conectando con lo vivido y prepar&aacute;ndote para lo que viene. Es un momento de reflexi&oacute;n, celebraci&oacute;n y renovaci&oacute;n.</p>\r\n"
+					+ "<p>&nbsp;</p>"
+					+ "<p><strong>&iquest;Qu&eacute; encontrar&aacute;s en tu ebook? </strong><strong>&#127774;</strong></p>\r\n"
+					+ "<ul>\r\n"
+					+ "<li><strong>Un ritual sencillo pero potente</strong> para decir adi&oacute;s al verano de manera consciente.</li>\r\n"
+					+ "<li><strong>Preguntas poderosas</strong> que te ayudar&aacute;n a atesorar tus experiencias, agradecer y crecer.</li>\r\n"
+					+ "<li><strong>Una gu&iacute;a paso a paso</strong> para que puedas realizar el ritual en cualquier lugar y en tu propio tiempo.</li>\r\n"
+					+ "<li><strong>Una invitaci&oacute;n a abrirte a lo nuevo</strong>, con energ&iacute;a y vitalidad, mientras cerramos este ciclo</li>\r\n"
+					+ "<li><strong>Una propuesta para crear tu bote de conservas emocionales.</strong></li>\r\n"
+					+ "</ul>\r\n"
+					+ "<p>&nbsp;</p>"
+					+ "<p><strong>&iquest;Qu&eacute; necesitas para empezar? </strong><strong>&#128221;</strong></p>\r\n"
+					+ "<ol>\r\n"
+					+ "<li>Regalarte y permitirte un tiempo y espacio para ti, para parar, pausar y as&iacute; enchufarte a ti 100%</li>\r\n"
+					+ "<li>Curiosidad y apertura: Abre tu coraz&oacute;n y prep&aacute;rate para una experiencia de conexi&oacute;n interior poderosa.</li>\r\n"
+					+ "<li><strong>Descargar el ebook aqu&iacute; [inserta enlace de descarga].</strong></li>\r\n"
+					+ "</ol>\r\n"
+					+ "<p>&nbsp;</p>"
+					+ "<p style=\"text-align: right;\"><strong><em>Una enorme sonrisa, Ana </em></strong><strong><em>&#128521;</em></strong></p>";                    
+
+			System.out.println("Vamos a mandar el siguiente body " + body);
+			
+			System.out.println("Vamos a mandar mail a dirección cliente " + signInCourses.getEmailAddress());
+			sendMailService.sendFormattedEmail("inscripciones@espaciobumeran.com", signInCourses.getEmailAddress(), subject, body);
+			
+			System.out.println("Vamos a mandar copia del mail a espaciobumeran@gmail.com");
+			sendMailService.sendFormattedEmail("inscripciones@espaciobumeran.com", "espaciobumeran@gmail.com", subject, body);
 		}
 		
-		System.out.println("Vamos a mandar mail a dirección cliente " + signInCourses.getEmailAddress());
-		sendMailService.sendMail("inscripciones@espaciobumeran.com", signInCourses.getEmailAddress(), subject, body);
-		
-		System.out.println("Vamos a mandar copia del mail a espaciobumeran@gmail.com");
-		sendMailService.sendMail("inscripciones@espaciobumeran.com", "espaciobumeran@gmail.com", subject, body);
+
 		
 
 		
 		return inscriptionId + "";
 	}
 
+	@PostMapping(path="/users/sendMailService", consumes = "application/json")
+	public String sendMailService (@RequestBody SendMailServiceIn sendMailServiceIn) {
+		
+		sendMailService.sendMail("info@espaciobumeran.com", sendMailServiceIn.getEmail(), sendMailServiceIn.getSubject(), sendMailServiceIn.getMessage());
+		
+		return "OK";
+	}
 
 }

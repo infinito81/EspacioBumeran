@@ -32,8 +32,8 @@ cur.modalidad
 	
 	<insert id="insertInscription">
 			INSERT INTO public."Inscription"(
-				"email", "nombre", "apellidos", "telefono", "inscriptionDate", "pack")
-				VALUES (#{email}, #{nombre}, #{apellidos}, #{telefono}, CURRENT_TIMESTAMP, #{pack});
+				"email", "nombre", "apellidos", "telefono", "inscriptionDate", "pack", "city")
+				VALUES (#{email}, #{nombre}, #{apellidos}, #{telefono}, CURRENT_TIMESTAMP, #{pack},#{city});
 	</insert>
 	
 	
