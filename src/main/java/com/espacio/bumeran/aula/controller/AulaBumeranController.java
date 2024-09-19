@@ -178,7 +178,7 @@ public class AulaBumeranController {
 		} else if (signInCourses.getPack().equals("22")) {
 			//FREE EBOOK
 			coursesMapper.insertCourseInscription(Integer.parseInt(signInCourses.getPack()), inscriptionId);
-			subject = "EBOOK SUBJECT";
+			subject = "Regalazo Descarga Ritual";
 		}
 		
 		
@@ -244,7 +244,7 @@ public class AulaBumeranController {
 					+ "<ol>\r\n"
 					+ "<li>Regalarte y permitirte un tiempo y espacio para ti, para parar, pausar y as&iacute; enchufarte a ti 100%</li>\r\n"
 					+ "<li>Curiosidad y apertura: Abre tu coraz&oacute;n y prep&aacute;rate para una experiencia de conexi&oacute;n interior poderosa.</li>\r\n"
-					+ "<li><strong>Descargar el ebook aqu&iacute; [inserta enlace de descarga].</strong></li>\r\n"
+					+ "<li><strong><a href=\"https://1drv.ms/b/s!AuJ8WOC8jaWohvt-eGqSiK8N3hn1yg\">Descargar el ebook</a></strong></li>\r\n"
 					+ "</ol>\r\n"
 					+ "<p>&nbsp;</p>"
 					+ "<p style=\"text-align: right;\"><strong><em>Una enorme sonrisa, Ana </em></strong><strong><em>&#128521;</em></strong></p>";                    
