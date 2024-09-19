@@ -1,5 +1,6 @@
 package com.espacio.bumeran.aula.services;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -68,9 +69,10 @@ public class SendMailService {
         try {
             // Crear el mensaje
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(senderEmail));
+            message.setFrom(new InternetAddress(senderEmail, "Espacio Búmeran"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject(subject);
+            
 
             // Cuerpo del correo en formato HTML
             
@@ -94,6 +96,9 @@ public class SendMailService {
         } catch (MessagingException e) {
             e.printStackTrace();
             System.out.println("Error al enviar el correo: " + e.getMessage());
-        }
+        } catch (UnsupportedEncodingException e) {
+        	 e.printStackTrace();
+             System.out.println("Error al enviar el correo: " + e.getMessage());
+		}
     }	
 }	
